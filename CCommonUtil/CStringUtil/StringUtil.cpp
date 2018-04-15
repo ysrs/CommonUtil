@@ -30,10 +30,12 @@ std::string CStringUtil::IntegerToString(const int& iValue, const int &iRadix)
 	return strBuf;
 }
 
-std::string CStringUtil::DoubleToString(const double& dValue, const std::string& strPrecision)
+std::string CStringUtil::DoubleToString(const double& dValue, const int &iDecimalPlaces)
 {
 	char strBuf[MAXBYTE] = { 0 };
-	sprintf_s(strBuf, strPrecision.c_str(), dValue);
+	char strFormat[MAXBYTE] = { 0 };
+	sprintf_s(strFormat, MAXBYTE, "%%.%dlf", iDecimalPlaces);
+	sprintf_s(strBuf, MAXBYTE, strFormat, dValue);
 	return strBuf;
 }
 
@@ -44,73 +46,144 @@ std::wstring CStringUtil::IntegerToWString(const int& iValue, const int& iRadix)
 	return wstrBuf;
 }
 
-std::wstring CStringUtil::DoubleToWString(const double& dValue, const std::wstring& wstrPrecision)
+std::wstring CStringUtil::DoubleToWString(const double& dValue, const int &iDecimalPlaces)
 {
 	wchar_t wstrBuf[MAXBYTE] = { 0 };
-	wsprintf(wstrBuf, wstrPrecision.c_str(), dValue);
+	wchar_t wstrFormat[MAXBYTE] = { 0 };
+	swprintf_s(wstrFormat, MAXBYTE, L"%%.%dlf", iDecimalPlaces);
+	swprintf_s(wstrBuf, MAXBYTE, wstrFormat, dValue);
 	return wstrBuf;
 }
 
-std::string CStringUtil::ToUpper(const std::string& strValue)
+std::string CStringUtil::ToUpper(std::string& strValue)
 {
-	std::string strRet;
-
 	for (size_t i = 0; i<strValue.size(); ++i)
 	{
-		strRet += toupper(strValue[i]);
+		strValue[i] = toupper(strValue[i]);
 	}
 
-	return strRet;
+	return strValue;
 }
 
-std::wstring CStringUtil::ToUpper(const std::wstring& wstrValue)
+std::wstring CStringUtil::ToUpper(std::wstring& wstrValue)
 {
-	std::wstring wstrRet;
-
 	for (size_t i = 0; i<wstrValue.size(); ++i)
 	{
-		wstrRet += towupper(wstrValue[i]);
+		wstrValue[i] = towupper(wstrValue[i]);
 	}
 
-	return wstrRet;
+	return wstrValue;
 }
 
-std::string CStringUtil::ToLower(const std::string& strValue)
+std::string CStringUtil::ToLower(std::string& strValue)
 {
-	std::string strRet;
-
 	for (size_t i = 0; i<strValue.size(); ++i)
 	{
-		strRet += tolower(strValue[i]);
+		strValue[i] = tolower(strValue[i]);
 	}
 
-	return strRet;
+	return strValue;
 }
 
-std::wstring CStringUtil::ToLower(const std::wstring& wstrValue)
+std::wstring CStringUtil::ToLower(std::wstring& wstrValue)
 {
-	std::wstring wstrRet;
-
 	for (size_t i = 0; i<wstrValue.size(); ++i)
 	{
-		wstrRet += towlower(wstrValue[i]);
+		wstrValue[i] = towlower(wstrValue[i]);
 	}
 
-	return wstrRet;
+	return wstrValue;
 }
 
-std::string CStringUtil::TrimLeft(const std::string& strValue)
+std::string CStringUtil::TrimLeft(std::string& strValue)
 {
-	std::string strRet;
+	if (!strValue.empty())
+	{
+		strValue.erase(0, strValue.find_first_not_of(" \t"));
+	}
 
+	return strValue;
+}
 
-	return strRet;
+std::wstring CStringUtil::TrimLeft(std::wstring& wstrValue)
+{
+	if (!wstrValue.empty())
+	{
+		wstrValue.erase(0, wstrValue.find_first_not_of(L" \t"));
+	}
+
+	return wstrValue;
+}
+
+std::string CStringUtil::TrimRight(std::string& strValue)
+{
+	if (!strValue.empty())
+	{
+		strValue.erase(strValue.find_last_not_of(" \t") + 1);
+	}
+
+	return strValue;
+}
+
+std::wstring CStringUtil::TrimRight(std::wstring& wstrValue)
+{
+	if (!wstrValue.empty())
+	{
+		wstrValue.erase(wstrValue.find_last_not_of(L" \t"));
+	}
+
+	return wstrValue;
+}
+
+std::string CStringUtil::Trim(std::string &strValue)
+{
+	TrimLeft(strValue);
+	TrimRight(strValue);
+
+	return strValue;
+}
+
+std::wstring CStringUtil::Trim(std::wstring& wstrValue)
+{
+	TrimLeft(wstrValue);
+	TrimRight(wstrValue);
+
+	return wstrValue;
 }
 
 std::wstring CStringUtil::StringToWString(const std::string& strValue)
 {
 	std::wstring wstrRet;
 
+	do
+	{
+		int iSize = MultiByteToWideChar(CP_ACP, 0, strValue.c_str(), strValue.length(), nullptr, 0);
+		if (iSize <= 0)
+		{
+			break;
+		}
+
+		wchar_t *pWBuf = new wchar_t[iSize + 1];
+		if (nullptr == pWBuf)
+		{
+			break;
+		}
+
+		MultiByteToWideChar(CP_ACP, 0, strValue.c_str(), strValue.length(), pWBuf, iSize);
+		pWBuf[iSize] = 0;
+		// 跳过0xFEFF，这个值应该是签名属性
+		if (0xFEFF == pWBuf[0])
+		{
+			for (int i=0; i<iSize; ++i)
+			{
+				pWBuf[i] = pWBuf[i + 1];
+			}
+		}
+
+		wstrRet = pWBuf;
+		delete[] pWBuf;
+	}
+	while (false);
 
 	return wstrRet;
 }
