@@ -1,11 +1,2 @@
-<<<<<<< HEAD
-﻿  StringUtil.cpp
-  main.cpp
-  正在生成代码...
-  CStringUtil.vcxproj -> D:\GitHub\CCommonUtil\CCommonUtil\Debug\CStringUtil.exe
+﻿  CStringUtil.vcxproj -> D:\GitHub\CCommonUtil\CCommonUtil\Debug\CStringUtil.exe
   CStringUtil.vcxproj -> D:\GitHub\CCommonUtil\CCommonUtil\Debug\CStringUtil.pdb (Full PDB)
-=======
-﻿  main.cpp
-  CStringUtil.vcxproj -> D:\Software\SourceCode\CCommonUtil\CCommonUtil\Debug\CStringUtil.exe
-  CStringUtil.vcxproj -> D:\Software\SourceCode\CCommonUtil\CCommonUtil\Debug\CStringUtil.pdb (Full PDB)
->>>>>>> 622dd28cadfad085d6c6b9f19eb6ca71b636bde5

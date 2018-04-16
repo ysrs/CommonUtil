@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CStringUtil", "CStringUtil\CStringUtil.vcxproj", "{8236E0BE-6778-4107-8798-423F62A8ED7F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CSqliteUtil", "CSqliteUtil\CSqliteUtil.vcxproj", "{3EE6EED9-F44D-499D-BB97-2442EF50CD12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{8236E0BE-6778-4107-8798-423F62A8ED7F}.Release|x64.Build.0 = Release|x64
 		{8236E0BE-6778-4107-8798-423F62A8ED7F}.Release|x86.ActiveCfg = Release|Win32
 		{8236E0BE-6778-4107-8798-423F62A8ED7F}.Release|x86.Build.0 = Release|Win32
+		{3EE6EED9-F44D-499D-BB97-2442EF50CD12}.Debug|x64.ActiveCfg = Debug|x64
+		{3EE6EED9-F44D-499D-BB97-2442EF50CD12}.Debug|x64.Build.0 = Debug|x64
+		{3EE6EED9-F44D-499D-BB97-2442EF50CD12}.Debug|x86.ActiveCfg = Debug|Win32
+		{3EE6EED9-F44D-499D-BB97-2442EF50CD12}.Debug|x86.Build.0 = Debug|Win32
+		{3EE6EED9-F44D-499D-BB97-2442EF50CD12}.Release|x64.ActiveCfg = Release|x64
+		{3EE6EED9-F44D-499D-BB97-2442EF50CD12}.Release|x64.Build.0 = Release|x64
+		{3EE6EED9-F44D-499D-BB97-2442EF50CD12}.Release|x86.ActiveCfg = Release|Win32
+		{3EE6EED9-F44D-499D-BB97-2442EF50CD12}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
